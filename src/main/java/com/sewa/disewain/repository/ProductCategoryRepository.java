@@ -1,10 +1,18 @@
 package com.sewa.disewain.repository;
 
-import com.sewa.disewain.model.ProductCateogryModel;
-import com.sewa.disewain.model.ProductModel;
+import com.sewa.disewain.model.ProductCategoryModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface ProductCategoryRepository extends JpaRepository<ProductCateogryModel, Long> {
+@Transactional
+public interface ProductCategoryRepository extends JpaRepository<ProductCategoryModel, Long> {
+
+    @Modifying
+    @Query(value = "update product_categories set is_deleted = :flag where id = :id", nativeQuery = true)
+    void deleteOne(@Param("flag") boolean flagDeleted, @Param("id") Long id);
 }
