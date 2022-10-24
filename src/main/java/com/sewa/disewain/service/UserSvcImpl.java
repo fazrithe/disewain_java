@@ -19,12 +19,14 @@ public class UserSvcImpl implements UserSvc {
         this.userRepo = userRepo;
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     private UserModel user(UserForm form) {
         UserModel user = new UserModel();
         user.setUsernmae(form.getUsername());
         user.setEmail(form.getEmail());
         user.setPassword(form.getPassword());
-        user.setPassword(form.getPassword());
+        user.setPassword(passwordEncoder.encode(form.getPassword()));
         return user;
     }
 
