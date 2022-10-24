@@ -10,7 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -36,6 +35,7 @@ public abstract class BaseDao {
     void onCreate(){
         this.createdAt = LocalDateTime.now();
         this.createdBy = AppConstan.CREATE_BY_SYSTEM;
+        this.updateAt = LocalDateTime.now();
         this.isDeleted = false;
     }
 

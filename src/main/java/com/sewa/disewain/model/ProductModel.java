@@ -1,22 +1,18 @@
 package com.sewa.disewain.model;
 
-
-
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
 import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = true)
+@Data
 @Entity()
 @Table(name = "products")
 @NoArgsConstructor
+@Where(clause = "is_deleted = false")
 public class ProductModel extends BaseDao {
 
     @Id
@@ -25,11 +21,17 @@ public class ProductModel extends BaseDao {
 
     @OneToOne
     @JoinColumn(name = "category_product_id")
-    private ProductCateogryModel productCateogryModel;
+    private ProductModel productModel;
 
     @Column(name = "product_name", nullable = false)
     private String productName;
 
     @Column(name = "price", nullable = false)
-    private String price;
+    private Double productPrice;
+
+    public void setProductModel(Long productCateogryModel) {
+    }
+
+    public void getProductPrice(Double productPrice) {
+    }
 }
